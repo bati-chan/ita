@@ -1,0 +1,22 @@
+{
+  "name": "ita",
+  "version": "11.5.1",
+  "description": "My main discord bot, avaliable for you all to reference.",
+  "scripts": {
+    "start": "node ita.js"
+  },
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "express": "^4.17.1",
+    "fs": "^0.0.2",
+    "dateformat": "^3.0.3",
+    "cheerio": "^0.22.0",
+    "request": "^2.88.2",
+    "http": "^0.0.0",
+    "quick.db": "^6.3.2",
+    "parse-ms": "^2.0.0"
+  },
+  "engines": {
+    "node": "10.x"
+  }
+}
