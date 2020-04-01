@@ -6,10 +6,10 @@ module.exports = async (client, message) => {
   client.generateInvite("ADMINISTRATOR").then(inviteLink => console.log(`Invite: ${inviteLink}`));
         
   client.user.setPresence({
-    status: "dnd",
+    status: "idle",
     game: {
-      name: `I am currently under development again! Please wait before using any of my commands again!`,
-      type: `STREAMING`
+      name: `Kantai Collection`,
+      type: `PLAYING`
     }
   });
 

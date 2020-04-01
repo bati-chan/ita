@@ -2,6 +2,7 @@ const { RichEmbed } = require("discord.js");
 const db = require("quick.db");
 
 module.exports = async (client, member) => {
+  const serverSize = client.guilds.get(member.guild.id).members.filter(m => !m.user.bot).size;
   let welcomeChannel = await db.fetch(`welcomeChannel_${member.guild.id}`);
   if (!welcomeChannel) return;
   else welcomeChannel = client.channels.get(welcomeChannel);
@@ -37,12 +38,14 @@ module.exports = async (client, member) => {
     if (topMessage.includes("{username}")) topMessage = topMessage.replace("{username}", member.user.username);
     if (topMessage.includes("{tag}")) topMessage = topMessage.replace("{tag}", member.user.tag);
     if (topMessage.includes("{id}")) topMessage = topMessage.replace("{id}", member.user.id);
+    if (topMessage.includes("{server size}")) topMessage = topMessage.replace("{server size}", serverSize);
   }
   if (authorImage) if (authorImage.includes("{avatar}")) authorImage = authorImage.replace("{avatar}", member.user.displayAvatarURL);
   if (title) {
     if (title.includes("{username}")) title = title.replace("{username}", member.user.username);
     if (title.includes("{tag}")) title = title.replace("{tag}", member.user.tag);
     if (title.includes("{id}")) title = title.replace("{id}", member.user.id);
+    if (title.includes("{server size}")) title = title.replace("{server size}", serverSize);
   }
   if (description) {
     if (description.includes("{username}")) description = description.replace("{username}", member.user.username);
@@ -50,6 +53,7 @@ module.exports = async (client, member) => {
     if (description.includes("{id}")) description = description.replace("{id}", member.user.id);
   }
   if (thumbnail) if (thumbnail.includes("{avatar}")) thumbnail = thumbnail.replace("{avatar}", member.user.displayAvatarURL);
+  if (footer) if (footer.includes("{server size}")) footer = footer.replace("{server size}", serverSize);
   
   try {
     if (authorImage) welcomeEmbed.setAuthor(authorImage);
