@@ -2,10 +2,10 @@ const { RichEmbed } = require("discord.js");
 const db = require("quick.db");
 
 module.exports = async (client, oldMessage, newMessage) => {
+  if (oldMessage.author.bot) return;
   if (oldMessage.content === newMessage.content) return;
   if (oldMessage.channel.id === "689540035371991101") return;
   if (oldMessage.content.length > 1024) return;
-  if (oldMessage.member.bot) return;
   
   let logChannel = await db.fetch(`logChannel_${oldMessage.guild.id}`);
   if (!logChannel) return;
@@ -13,7 +13,7 @@ module.exports = async (client, oldMessage, newMessage) => {
   try {
     logChannel = client.channels.get(logChannel);
     const logEmbed = new RichEmbed()
-      .setColor("#38013A")
+      .setColor("#ffb7c5")
       .setAuthor("Edited Message", oldMessage.member.displayAvatarURL)
       .setDescription(`An edited message has been found by ${oldMessage.member} in ${oldMessage.channel}.`)
       .addField(`Before`, oldMessage.content)

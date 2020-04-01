@@ -2,11 +2,11 @@ const { RichEmbed } = require("discord.js");
 const db = require("quick.db");
 
 module.exports = async (client, message) => {
-  if (message.member.bot) return;
-  if (message.member.id === "493716749342998541") return;
-  if (message.channel.id === "689540035371991101") return;
-  if (message.content.length > 1024) return;
+  if (message.author.bot) return;
   if (message.content === ".pick") return;
+  if (message.content === "~c") return;
+  if (message.content === "~verify") return;
+  if (message.content.length > 1024) return;
 
   let logChannel = await db.fetch(`logChannel_${message.guild.id}`);
   if (!logChannel) return;
@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
   try {
     logChannel = client.channels.get(logChannel);
     const logEmbed = new RichEmbed()
-      .setColor("#38013A")
+      .setColor("#ffb7c5")
       .setAuthor("Deleted Message", message.member.displayAvatarURL)
       .setDescription(`A deleted message has been found by ${message.member} in ${message.channel}.`)
       .addField(`Message`, message.content)
